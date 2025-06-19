@@ -1,0 +1,35 @@
+name = "chatbot-openrouter"
+main = "src/index.ts"
+compatibility_date = "2023-12-31"
+
+[build]
+  command = "npm run build"
+  outdir = "dist"
+  cwd = "."
+  watch_dir = "src"
+
+[dev]
+  port = 8787
+  ip = "0.0.0.0"
+  local_protocol = "http"
+
+# Explicitly define the entry point
+[build.upload]
+  format = "modules"
+  main = "./src/index.ts"
+  rules = [
+    { type = "ESModule", globs = ["**/*.ts"] }
+  ]
+
+# D1 Database binding (will be created during setup)
+[[d1_databases]]
+binding = "DB"
+database_name = "chatbot-db"
+database_id = ""  # Will be filled after D1 database creation
+
+# Environment variables (secrets will be set via wrangler secret:put)
+[vars]
+NODE_ENV = "development"
+
+[build.upload]
+format = "service-worker"
