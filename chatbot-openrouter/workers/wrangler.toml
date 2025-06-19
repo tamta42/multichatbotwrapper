@@ -31,5 +31,3 @@ database_id = ""  # Will be filled after D1 database creation
 [vars]
 NODE_ENV = "development"
 
-[build.upload]
-format = "service-worker"
