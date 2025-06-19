@@ -31,3 +31,8 @@ database_id = ""  # Will be filled after D1 database creation
 [vars]
 NODE_ENV = "development"
 
+
+[[d1_databases]]
+binding = "DB"
+database_name = "chatbot-openrouter-db"
+database_id = "9dc4a4ae-3ab0-459a-aa42-ca3ad2427d8f"
