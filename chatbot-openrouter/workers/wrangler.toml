@@ -24,15 +24,10 @@ compatibility_date = "2023-12-31"
 # D1 Database binding (will be created during setup)
 [[d1_databases]]
 binding = "DB"
-database_name = "chatbot-db"
-database_id = ""  # Will be filled after D1 database creation
+database_name = "chatbot-openrouter-db"
+database_id = "9dc4a4ae-3ab0-459a-aa42-ca3ad2427d8f"
 
 # Environment variables (secrets will be set via wrangler secret:put)
 [vars]
 NODE_ENV = "development"
-
-
-[[d1_databases]]
-binding = "DB"
-database_name = "chatbot-openrouter-db"
 database_id = "9dc4a4ae-3ab0-459a-aa42-ca3ad2427d8f"
