@@ -50,4 +50,30 @@ app.onError((err: Error, c: Context<Bindings>) => {
   );
 });
 
+// Proxy endpoint to OpenRouter API
+app.post('/api/openrouter/proxy', async (c: Context<Bindings>) => {
+  const apiKey = c.env.openrouter_apikey || c.env.OPENROUTER_API_KEY;
+  const apiKeyName = c.env.openrouter_apikeyname;
+  const apiUrl = c.env.openrouter_url;
+
+  if (!apiKey || !apiKeyName || !apiUrl) {
+    return c.json({ error: 'Missing OpenRouter API credentials.' }, 400);
+  }
+
+  // Forward the request body as JSON to OpenRouter
+  const reqBody = await c.req.json();
+
+  const resp = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `${apiKeyName} ${apiKey}`
+    },
+    body: JSON.stringify(reqBody)
+  });
+
+  const data = await resp.json();
+  return c.json(data, resp.status);
+});
+
 export default app;
